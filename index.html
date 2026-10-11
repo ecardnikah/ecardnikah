@@ -372,14 +372,28 @@ const openWax = document.getElementById("openWax");
 let envelopeOpened = false;
 
 function openInvitation() {
-  if (envelopeOpened || !envelope) return;
-  envelopeOpened = true;
-  envelope.classList.add("opening");
-  window.setTimeout(() => {
-    envelope.classList.add("hide");
-    document.body.classList.remove("no-scroll");
-    document.body.style.removeProperty("touch-action");
-  }, 1500);
+if (envelopeOpened || !envelope) return;
+
+envelopeOpened = true;
+
+// Mula memainkan muzik apabila wax seal ditekan
+if (music) {
+music.play().then(() => {
+musicButton.setAttribute(“aria-pressed”, “true”);
+musicButton.setAttribute(“aria-label”, “Hentikan muzik”);
+}).catch(error => {
+console.log(“Muzik tidak dapat dimainkan secara automatik:”, error);
+});
+}
+
+// Animasi buka sampul
+envelope.classList.add(“opening”);
+
+window.setTimeout(() => {
+envelope.classList.add(“hide”);
+document.body.classList.remove(“no-scroll”);
+document.body.style.removeProperty(“touch-action”);
+}, 1500);
 }
 openWax?.addEventListener("click", openInvitation);
 document.addEventListener("keydown", event => {
