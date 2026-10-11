@@ -372,30 +372,47 @@ const openWax = document.getElementById("openWax");
 let envelopeOpened = false;
 
 function openInvitation() {
-if (envelopeOpened || !envelope) return;
 
-envelopeOpened = true;
-envelope.classList.add(“opening”);
+  if (envelopeOpened || !envelope) return;
 
-const audio = document.getElementById(“music”);
-const button = document.getElementById(“musicButton”);
+  envelopeOpened = true;
 
-if (audio) {
-audio.play().then(() => {
-if (button) {
-button.setAttribute(“aria-pressed”, “true”);
-button.setAttribute(“aria-label”, “Hentikan muzik”);
-}
-}).catch(error => {
-console.log(“Muzik tidak dapat dimainkan:”, error);
-});
-}
+  envelope.classList.add("opening");
 
-window.setTimeout(() => {
-envelope.classList.add(“hide”);
-document.body.classList.remove(“no-scroll”);
-document.body.style.removeProperty(“touch-action”);
-}, 1500);
+  const audio = document.getElementById("music");
+
+  const button = document.getElementById("musicButton");
+
+  if (audio) {
+
+    audio.play().then(() => {
+
+      if (button) {
+
+        button.setAttribute("aria-pressed", "true");
+
+        button.setAttribute("aria-label", "Hentikan muzik");
+
+      }
+
+    }).catch(error => {
+
+      console.log("Muzik tidak dapat dimainkan:", error);
+
+    });
+
+  }
+
+  window.setTimeout(() => {
+
+    envelope.classList.add("hide");
+
+    document.body.classList.remove("no-scroll");
+
+    document.body.style.removeProperty("touch-action");
+
+  }, 1500);
+
 }
 openWax?.addEventListener("click", openInvitation);
 document.addEventListener("keydown", event => {
