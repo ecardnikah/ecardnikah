@@ -650,6 +650,64 @@ footer strong{display:block;font:25px var(--serif);color:#342d28;margin-bottom:4
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+/* ==========================================
+   ULTRA PREMIUM ENVELOPE ANIMATION
+========================================== */
+
+/* Kad jemputan berada di belakang sampul sebelum dibuka */
+#envelope .envelope-card {
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(35%);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.12),
+        0 25px 60px rgba(0, 0, 0, 0.10);
+    transition:
+        transform 2.2s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.8s ease,
+        box-shadow 1.2s ease;
+}
+
+/* Penutup sampul terbuka ke belakang */
+#envelope .envelope-flap {
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition:
+        transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Kad naik keluar dan berada di hadapan sampul */
+#envelope.opening .envelope-card {
+    z-index: 9;
+    opacity: 1;
+    transform: translateY(-50%);
+    box-shadow:
+        0 20px 35px rgba(0, 0, 0, 0.20),
+        0 45px 90px rgba(0, 0, 0, 0.22),
+        0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+/* Penutup sampul berpusing ke belakang */
+#envelope.opening .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+/* Bayang sampul lebih lembut semasa dibuka */
+#envelope.opening .envelope-body {
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+/* Meterai lilin menghilang semasa kad keluar */
+#envelope.opening .floral-wax {
+    opacity: 0;
+    transform: scale(0.65);
+    transition:
+        opacity 0.5s ease,
+        transform 0.6s ease;
+    pointer-events: none;
+}
 </style>
 </head>
 
