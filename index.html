@@ -800,16 +800,12 @@ if (window.supabase && SUPABASE_URL && SUPABASE_ANON_KEY) {
 const envelope = document.getElementById("envelope");
 const openWax = document.getElementById("openWax");
 let envelopeOpened = false;
-
 function openInvitation() {
   if (envelopeOpened || !envelope) return;
-
   envelopeOpened = true;
   envelope.classList.add("opening");
-
   const audio = document.getElementById("music");
   const button = document.getElementById("musicButton");
-
   if (audio) {
     audio.play().then(() => {
       if (button) {
@@ -820,16 +816,22 @@ function openInvitation() {
       console.log("Muzik tidak dapat dimainkan:", error);
     });
   }
-
+  // Tunggu animasi sampul selesai sebelum paparkan halaman utama
   window.setTimeout(() => {
-  envelope.classList.add("hide");
-
-  document.body.classList.remove("no-scroll");
-  document.body.style.removeProperty("touch-action");
-}, 4500);
-openWax?.addEventListener("click", openInvitation);
+    envelope.classList.add("hide");
+    document.body.classList.remove("no-scroll");
+    document.body.style.removeProperty("touch-action");
+  }, 4500);
+}
+// Tekan wax seal untuk membuka sampul
+if (openWax) {
+  openWax.addEventListener("click", openInvitation);
+}
+// Tekan Escape sebagai pilihan tambahan
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && !envelopeOpened) openInvitation();
+  if (event.key === "Escape" && !envelopeOpened) {
+    openInvitation();
+  }
 });
 
 /* Countdown uses Malaysia/Singapore local time (UTC+8). */
