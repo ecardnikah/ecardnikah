@@ -35,30 +35,10 @@ section{padding:clamp(68px,9vw,100px) 0}
 .section-title h2{font:500 clamp(43px,7vw,65px)/1.05 var(--serif);margin-top:8px}
 :focus-visible{outline:2px solid #9b7658;outline-offset:4px}
 
-/* FULL-SCREEN FLORAL ENVELOPE */
-#envelope{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:99999;overflow:hidden;display:grid;place-items:center;background:var(--sage);opacity:1;visibility:visible;transition:opacity .9s ease,visibility .9s ease}
-#envelope.hide{opacity:0;visibility:hidden;pointer-events:none}
-.floral-design{position:relative;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 20% 20%,rgba(255,255,255,.24),transparent 45%),radial-gradient(ellipse at 80% 75%,rgba(70,83,52,.18),transparent 50%),linear-gradient(135deg,#c4cbb0,#aab397 45%,#c3c9af);transition:transform 1.5s ease}
-.floral-design:before{content:"";position:absolute;inset:0;background-image:url("sage-floral.JPG");background-size:cover;background-position:center;opacity:.8;pointer-events:none}
-.floral-design:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.2;background:repeating-linear-gradient(0deg,rgba(50,60,38,.07) 0 1px,transparent 1px 4px),linear-gradient(120deg,transparent 20%,rgba(255,255,255,.2) 50%,transparent 75%)}
-.ribbon{position:absolute;z-index:2;pointer-events:none;background:linear-gradient(90deg,#d9dfb5,#edf0d1 28%,#dce3b9 55%,#c5cda0);box-shadow:inset 0 1px 2px #ffffff8c,0 2px 5px #28321914}
-.ribbon-vertical{top:0;bottom:0;left:50%;width:clamp(54px,15vw,110px);transform:translateX(-50%)}
-.ribbon-horizontal{left:0;right:0;top:43%;height:clamp(38px,8vh,68px)}
-.floral-wax{position:absolute;z-index:5;top:46%;left:50%;width:clamp(105px,30vw,145px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:5px solid #a83c32;display:flex;align-items:center;justify-content:center;color:#f9b2a0;background:radial-gradient(circle at 32% 25%,#ff9180 0%,#dc493d 30%,#bc3029 62%,#7d201d 100%);box-shadow:0 8px 14px #411e164d,inset 0 3px 5px #ffcdbe8c,inset 0 -7px 10px #500a0a47;transition:transform .45s ease,opacity .45s ease}
-.floral-wax:before{content:"";position:absolute;inset:9px;border-radius:50%;border:2px solid #64141273;box-shadow:inset 0 1px 2px #ffc8b973}
-.floral-wax:after{content:"";position:absolute;inset:16px;border-radius:50%;border:1px solid #ffb4a061}
-.wax-initials{position:relative;z-index:2;display:flex;align-items:center;font:italic clamp(22px,6vw,31px) var(--serif);text-shadow:0 1px 2px #5a0f0c80}
-.wax-initials span{font-size:.6em;margin:0 3px}
-.invitation-title{position:absolute;z-index:4;top:57%;width:100%;text-align:center;color:#20251a;font:clamp(35px,10vw,52px)/1.2 "Great Vibes",cursive;transform:rotate(-7deg);text-shadow:0 1px 1px #ffffff40}
-.invitation-subtitle,.invitation-date{position:absolute;z-index:4;width:100%;text-align:center;font-family:var(--sans);color:#414735}
-.invitation-subtitle{top:65%;font-size:9px;letter-spacing:2.5px}
-.invitation-date{top:69%;font-size:10px;letter-spacing:3px}
-.invitation-tap{position:absolute;z-index:4;bottom:max(35px,env(safe-area-inset-bottom));width:100%;text-align:center;font-size:9px;letter-spacing:2.5px;color:#454c38;animation:pulse 2s infinite}
-#envelope.opening .floral-wax{transform:translate(-50%,-50%) scale(.6) rotate(-12deg);opacity:0}
-#envelope.opening .floral-design{transform:scale(1.04)}
-@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+/* =========================================
+   FULL-SCREEN SAGE FLORAL ENVELOPE
+========================================= */
 
-/* FULL SCREEN ENVELOPE OPENING EFFECT */
 #envelope {
   position: fixed;
   inset: 0;
@@ -67,13 +47,11 @@ section{padding:clamp(68px,9vw,100px) 0}
   height: 100dvh;
   z-index: 99999;
   overflow: hidden;
-  display: grid;
-  place-items: center;
   background: #aab397;
   perspective: 1200px;
   opacity: 1;
   visibility: visible;
-  transition: opacity 1s ease, visibility 1s ease;
+  transition: opacity .9s ease, visibility .9s ease;
 }
 
 #envelope.hide {
@@ -87,52 +65,64 @@ section{padding:clamp(68px,9vw,100px) 0}
   width: 100%;
   height: 100%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(ellipse at 20% 20%, #ffffff40, transparent 45%),
-    linear-gradient(135deg, #c4cbb0, #aab397 50%, #c3c9af);
-  transform-origin: center;
-  transition: transform 1.5s ease;
+  isolation: isolate;
+  background: #aab397;
 }
 
-.floral-design:before {
+/* Corak floral memenuhi seluruh skrin */
+.floral-design::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("sage-floral.JPG");
+  z-index: -2;
+  background-image: url("./sage-floral.JPG");
   background-size: cover;
   background-position: center;
-  opacity: .8;
-  pointer-events: none;
+  background-repeat: no-repeat;
 }
 
-/* KAD DI DALAM SAMPUL */
+/* Lapisan lembut untuk gaya premium */
+.floral-design::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(235, 237, 220, .12);
+}
+
+/* =========================================
+   KAD DI DALAM SAMPUL
+========================================= */
+
 .envelope-card {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   left: 8%;
   width: 84%;
   height: 55%;
   top: 50%;
-  background: linear-gradient(145deg, #fffefa, #f5eee5);
-  border: 1px solid #dfd1c4;
-  box-shadow: 0 15px 45px #342d2833;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+
   padding: 25px;
+  background: linear-gradient(145deg, #fffefa, #f5eee5);
+  border: 1px solid #dfd1c4;
+  box-shadow: 0 15px 45px #342d2833;
+
   transform: translateY(35%);
   opacity: 0;
+
   transition:
     transform 1.4s cubic-bezier(.2,.75,.25,1),
     opacity .5s ease;
 }
 
-.envelope-card:before {
+.envelope-card::before {
   content: "✦";
   color: #a08369;
   font-size: 24px;
@@ -160,26 +150,132 @@ section{padding:clamp(68px,9vw,100px) 0}
   color: #85776d;
 }
 
-/* KEPING SAMPUL */
+/* =========================================
+   BADAN SAMPUL SEGI EMPAT
+========================================= */
+
+.envelope-body {
+  position: absolute;
+  z-index: 3;
+
+  left: 5%;
+  right: 5%;
+  top: 19%;
+  height: 52%;
+
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: 0 18px 45px rgba(38,45,29,.22);
+}
+
+/* =========================================
+   LIPATAN KIRI DAN KANAN
+========================================= */
+
+.envelope-fold-left,
+.envelope-fold-right {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.envelope-fold-left {
+  z-index: 4;
+
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: left center;
+
+  clip-path: polygon(
+    0 0,
+    50% 50%,
+    0 100%
+  );
+
+  filter: drop-shadow(2px 0 3px rgba(40,45,30,.12));
+}
+
+.envelope-fold-right {
+  z-index: 4;
+
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: right center;
+
+  clip-path: polygon(
+    100% 0,
+    50% 50%,
+    100% 100%
+  );
+
+  filter: drop-shadow(-2px 0 3px rgba(40,45,30,.12));
+}
+
+/* =========================================
+   LIPATAN BAWAH SAMPUL
+========================================= */
+
+.envelope-bottom {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: center bottom;
+
+  clip-path: polygon(
+    0 100%,
+    50% 48%,
+    100% 100%
+  );
+
+  filter: drop-shadow(0 -3px 5px rgba(40,45,30,.12));
+}
+
+/* =========================================
+   FLAP ATAS SAMPUL
+========================================= */
+
 .envelope-flap {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 6;
   pointer-events: none;
-  background: linear-gradient(145deg, #d0d6bd, #aab397 75%);
-  clip-path: polygon(0 0, 100% 0, 50% 56%);
-  filter: drop-shadow(0 8px 8px #34402b30);
+
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: center top;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    50% 56%
+  );
+
   transform-origin: 50% 0%;
   transform: rotateX(0deg);
   backface-visibility: hidden;
+
+  filter: drop-shadow(0 8px 8px rgba(40,45,30,.2));
+
   transition: transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-/* RIBBON */
+/* =========================================
+   RIBBON SAMPUL
+========================================= */
+
 .ribbon {
   position: absolute;
-  z-index: 5;
+  z-index: 7;
   pointer-events: none;
+
   background: linear-gradient(
     90deg,
     #d9dfb5,
@@ -187,7 +283,9 @@ section{padding:clamp(68px,9vw,100px) 0}
     #dce3b9 55%,
     #c5cda0
   );
+
   box-shadow: inset 0 1px 2px #ffffff8c;
+
   transition: opacity .5s ease;
 }
 
@@ -195,7 +293,7 @@ section{padding:clamp(68px,9vw,100px) 0}
   top: 0;
   bottom: 0;
   left: 50%;
-  width: clamp(54px, 15vw, 110px);
+  width: clamp(38px, 11vw, 65px);
   transform: translateX(-50%);
 }
 
@@ -203,85 +301,69 @@ section{padding:clamp(68px,9vw,100px) 0}
   left: 0;
   right: 0;
   top: 43%;
-  height: clamp(38px, 8vh, 68px);
+  height: clamp(30px, 6vh, 48px);
 }
 
-/* WAX SEAL */
+/* =========================================
+   WAX SEAL IMAGE
+========================================= */
+
 .floral-wax {
   position: absolute;
-  z-index: 8;
+  z-index: 10;
+
   top: 46%;
   left: 50%;
-  width: clamp(105px, 30vw, 145px);
+
+  width: clamp(90px, 25vw, 125px);
   aspect-ratio: 1;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+  box-shadow: 0 8px 18px rgba(30,20,15,.25);
+
   transform: translate(-50%, -50%);
+  transition: transform .5s ease, opacity .4s ease;
+}
+
+.floral-wax img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 50%;
-  border: 5px solid #a83c32;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f9b2a0;
-  background: radial-gradient(
-    circle at 32% 25%,
-    #ff9180 0%,
-    #dc493d 30%,
-    #bc3029 62%,
-    #7d201d 100%
-  );
-  box-shadow:
-    0 8px 14px #411e164d,
-    inset 0 3px 5px #ffcdbe8c,
-    inset 0 -7px 10px #500a0a47;
-  transition:
-    transform .55s ease,
-    opacity .4s ease;
 }
 
-.floral-wax:before {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  border-radius: 50%;
-  border: 2px solid #64141273;
+.floral-wax:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 5px;
 }
 
-.floral-wax:after {
-  content: "";
-  position: absolute;
-  inset: 16px;
-  border-radius: 50%;
-  border: 1px solid #ffb4a061;
-}
+/* =========================================
+   TEKS JEMPUTAN
+========================================= */
 
-.wax-initials {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  font: italic clamp(22px, 6vw, 31px) "Cormorant Garamond", serif;
-}
-
-.wax-initials span {
-  font-size: .6em;
-  margin: 0 3px;
-}
-
-/* TEKS ATAS SAMPUL */
 .invitation-title {
   position: absolute;
-  z-index: 6;
+  z-index: 8;
   top: 57%;
   width: 100%;
   text-align: center;
+
   color: #20251a;
   font: clamp(35px, 10vw, 52px)/1.2 "Great Vibes", cursive;
+
   transform: rotate(-7deg);
+  text-shadow: 0 1px 2px rgba(255,255,255,.4);
 }
 
 .invitation-subtitle,
 .invitation-date {
   position: absolute;
-  z-index: 6;
+  z-index: 8;
   width: 100%;
   text-align: center;
   font-family: "DM Sans", sans-serif;
@@ -302,17 +384,22 @@ section{padding:clamp(68px,9vw,100px) 0}
 
 .invitation-tap {
   position: absolute;
-  z-index: 9;
+  z-index: 11;
   bottom: max(35px, env(safe-area-inset-bottom));
   width: 100%;
   text-align: center;
+
   font-size: 9px;
   letter-spacing: 2px;
   color: #454c38;
+
   animation: pulse 2s infinite;
 }
 
-/* ANIMASI BILA WAX SEAL DITEKAN */
+/* =========================================
+   ANIMASI BUKA SAMPUL
+========================================= */
+
 #envelope.opening .envelope-flap {
   transform: rotateX(180deg);
 }
@@ -336,13 +423,17 @@ section{padding:clamp(68px,9vw,100px) 0}
 #envelope.opening .invitation-date,
 #envelope.opening .invitation-tap {
   opacity: 0;
-  transition: opacity .3s ease;}
+  transition: opacity .3s ease;
+}
 
 #envelope.opening .floral-design {
-  transform: scale(1.03);}
-  @keyframes pulse {
+  transform: scale(1.03);
+}
+
+@keyframes pulse {
   0%, 100% { opacity: .45; }
-  50% { opacity: 1; }}
+  50% { opacity: 1; }
+}
 
 
 /* HERO */
@@ -495,24 +586,36 @@ footer strong{display:block;font:25px var(--serif);color:#342d28;margin-bottom:4
 <!-- Sampul penuh skrin. Letakkan sage-floral.jpg dalam folder yang sama untuk corak bunga. -->
 <div id="envelope" role="dialog" aria-modal="true" aria-label="Sampul jemputan perkahwinan">
   <div class="floral-design">
-  
+
+    <!-- Kad jemputan di dalam sampul -->
     <div class="envelope-card">
       <div class="envelope-card-title">Jemputan Walimatulurus</div>
       <div class="envelope-card-names">Mizi &amp; Aina</div>
       <div class="envelope-card-date">20 DISEMBER 2026</div>
     </div>
 
+    <!-- Badan dan lipatan sampul -->
+    <div class="envelope-body"></div>
+    <div class="envelope-fold-left"></div>
+    <div class="envelope-fold-right"></div>
+    <div class="envelope-bottom"></div>
     <div class="envelope-flap"></div>
 
+    <!-- Ribbon -->
     <div class="ribbon ribbon-vertical" aria-hidden="true"></div>
     <div class="ribbon ribbon-horizontal" aria-hidden="true"></div>
+
+    <!-- Wax seal -->
     <button type="button" class="floral-wax" id="openWax" aria-label="Buka kad jemputan">
-      <span class="wax-initials">M<span>&amp;</span>A</span>
+      <img src="./wax-seal.JPG" alt="">
     </button>
+
+    <!-- Tulisan jemputan -->
     <div class="invitation-title">You are invited</div>
     <div class="invitation-subtitle">THE WEDDING OF MIZI &amp; AINA</div>
     <div class="invitation-date">20 · 12 · 2026</div>
     <div class="invitation-tap">TAP THE SEAL TO OPEN</div>
+
   </div>
 </div>
 
@@ -669,53 +772,30 @@ const openWax = document.getElementById("openWax");
 let envelopeOpened = false;
 
 function openInvitation() {
-
   if (envelopeOpened || !envelope) return;
 
   envelopeOpened = true;
-
   envelope.classList.add("opening");
 
   const audio = document.getElementById("music");
-
   const button = document.getElementById("musicButton");
 
   if (audio) {
-
     audio.play().then(() => {
-
       if (button) {
-
         button.setAttribute("aria-pressed", "true");
-
         button.setAttribute("aria-label", "Hentikan muzik");
-
       }
-
     }).catch(error => {
-
       console.log("Muzik tidak dapat dimainkan:", error);
-
     });
-
   }
 
   window.setTimeout(() => {
-
     envelope.classList.add("hide");
-
     document.body.classList.remove("no-scroll");
-
     document.body.style.removeProperty("touch-action");
-  
-window.setTimeout(() => {
-  envelope.classList.add("hide");
-  document.body.classList.remove("no-scroll");
-  document.body.style.removeProperty("touch-action");
-}, 2800);
-
-  }, 1500);
-
+  }, 2800);
 }
 openWax?.addEventListener("click", openInvitation);
 document.addEventListener("keydown", event => {
