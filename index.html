@@ -873,6 +873,120 @@ margin-bottom: 0;
 .hero .scroll {
   margin-top: 65px;
 }
+/* =========================================
+   ENVELOPE TERBELAH DUA
+========================================= */
+
+.envelope-half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+
+  transition:
+    transform 1.6s cubic-bezier(.65, 0, .35, 1);
+
+  will-change: transform;
+}
+
+/* Bahagian kiri */
+.envelope-half-left {
+  left: 0;
+  z-index: 10;
+}
+
+/* Bahagian kanan */
+.envelope-half-right {
+  right: 0;
+  z-index: 10;
+}
+
+/* Pastikan setiap komponen menggunakan saiz
+   keseluruhan sampul sebelum dipotong */
+.envelope-half .envelope-body,
+.envelope-half .envelope-fold-left,
+.envelope-half .envelope-fold-right,
+.envelope-half .envelope-bottom,
+.envelope-half .envelope-flap {
+  width: 200%;
+  height: 100%;
+  top: 0;
+  bottom: auto;
+  right: auto;
+  inset: 0 auto auto 0;
+}
+
+/* Bentuk badan sampul */
+.envelope-half .envelope-body {
+  left: 0;
+  right: auto;
+  height: 52%;
+  top: 19%;
+}
+
+/* Kedudukan lipatan kiri */
+.envelope-half-left .envelope-fold-left {
+  left: 0;
+}
+
+/* Kedudukan lipatan kanan */
+.envelope-half-right .envelope-fold-right {
+  left: -100%;
+}
+
+/* Lipatan bawah kiri */
+.envelope-half-left .envelope-bottom {
+  left: 0;
+}
+
+/* Lipatan bawah kanan */
+.envelope-half-right .envelope-bottom {
+  left: -100%;
+}
+
+/* Flap atas berada pada bahagian kanan */
+.envelope-half-right .envelope-flap {
+  left: -100%;
+}
+
+/* Ribbon kiri */
+.envelope-half-left .ribbon-vertical {
+  left: 100%;
+}
+
+/* Wax seal berada di tengah sampul */
+.envelope-half-left .floral-wax {
+  left: 100%;
+  z-index: 20;
+}
+
+/* =========================================
+   ANIMASI BUKA SAMPUL
+========================================= */
+
+/* Bahagian kiri bergerak ke kiri */
+#envelope.opening .envelope-half-left {
+  transform: translateX(-105%);
+}
+
+/* Bahagian kanan bergerak ke kanan */
+#envelope.opening .envelope-half-right {
+  transform: translateX(105%);
+}
+
+/* Kad jemputan muncul */
+#envelope.opening .envelope-card {
+  opacity: 1;
+  transform: translateY(-15%);
+}
+
+/* Halaman utama muncul selepas sampul dibuka */
+#envelope.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 </style>
 </head>
 
@@ -904,21 +1018,38 @@ margin-bottom: 0;
   </div>
 </div>
 
-    <!-- Badan dan lipatan sampul -->
-    <div class="envelope-body"></div>
-    <div class="envelope-fold-left"></div>
-    <div class="envelope-fold-right"></div>
-    <div class="envelope-bottom"></div>
-    <div class="envelope-flap"></div>
+    <!-- BAHAGIAN KIRI SAMPUL -->
+<div class="envelope-half envelope-half-left">
 
-    <!-- Ribbon -->
-    <div class="ribbon ribbon-vertical" aria-hidden="true"></div>
-    <div class="ribbon ribbon-horizontal" aria-hidden="true"></div>
+  <div class="envelope-body"></div>
+  <div class="envelope-fold-left"></div>
+  <div class="envelope-bottom"></div>
 
-    <!-- Wax seal -->
-    <button type="button" class="floral-wax" id="openWax" aria-label="Buka kad jemputan">
-      <img src="./wax-seal.JPG" alt="">
-    </button>
+  <!-- Ribbon kiri -->
+  <div class="ribbon ribbon-vertical" aria-hidden="true"></div>
+  <div class="ribbon ribbon-horizontal" aria-hidden="true"></div>
+
+  <!-- Wax seal ikut bahagian kiri -->
+  <button
+    type="button"
+    class="floral-wax"
+    id="openWax"
+    aria-label="Buka kad jemputan"
+  >
+    <img src="./wax-seal.JPG" alt="">
+  </button>
+
+</div>
+
+<!-- BAHAGIAN KANAN SAMPUL -->
+<div class="envelope-half envelope-half-right">
+
+  <div class="envelope-body"></div>
+  <div class="envelope-fold-right"></div>
+  <div class="envelope-bottom"></div>
+  <div class="envelope-flap"></div>
+
+</div>
 
     <!-- Tulisan jemputan -->
     <div class="invitation-title">You are invited</div>
