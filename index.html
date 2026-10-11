@@ -708,6 +708,127 @@ footer strong{display:block;font:25px var(--serif);color:#342d28;margin-bottom:4
         transform 0.6s ease;
     pointer-events: none;
 }
+/* ==========================================
+MALAY WEDDING INVITATION CARD
+========================================== */
+
+#envelope .envelope-card {
+box-sizing: border-box;
+padding: 10px;
+background: linear-gradient(145deg, #fffefa, #f8f0e2);
+border: 1px solid #d1b477;
+box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+}
+
+#envelope .invitation-border {
+box-sizing: border-box;
+width: 100%;
+height: 100%;
+min-height: 100%;
+border: 1px solid #b89a5c;
+outline: 1px solid rgba(184,154,92,0.35);
+outline-offset: -6px;
+padding: 25px 12px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+color: #57432b;
+position: relative;
+overflow: hidden;
+}
+
+#envelope .invitation-ornament {
+color: #a7894e;
+font-size: 25px;
+letter-spacing: 5px;
+margin-bottom: 18px;
+}
+
+#envelope .invitation-bismillah {
+font-size: 17px;
+line-height: 1.8;
+margin-bottom: 22px;
+color: #8d7040;
+}
+
+#envelope .invitation-small {
+font-family: “DM Sans”, sans-serif;
+font-size: 10px;
+letter-spacing: 5px;
+margin-bottom: 8px;
+color: #947846;
+}
+
+#envelope .envelope-card-title {
+font-family: “Cormorant Garamond”, Georgia, serif;
+font-size: clamp(24px, 7vw, 35px);
+line-height: 1.1;
+font-weight: 600;
+color: #74562f;
+margin-bottom: 15px;
+}
+
+#envelope .invitation-divider {
+display: flex;
+align-items: center;
+gap: 10px;
+color: #b3975d;
+margin-bottom: 18px;
+font-size: 15px;
+}
+
+#envelope .invitation-divider span {
+width: 35px;
+height: 1px;
+background: #c5a96d;
+}
+
+#envelope .envelope-card-names {
+font-family: “Great Vibes”, cursive;
+font-size: clamp(36px, 10vw, 50px);
+line-height: 1.25;
+font-weight: 400;
+color: #60462b;
+margin-bottom: 18px;
+}
+
+#envelope .envelope-card-names span {
+font-family: “Cormorant Garamond”, Georgia, serif;
+font-size: 25px;
+font-style: italic;
+color: #b3975d;
+}
+
+#envelope .invitation-blessing {
+font-family: “Cormorant Garamond”, Georgia, serif;
+font-size: 15px;
+line-height: 1.7;
+color: #78664e;
+margin-bottom: 22px;
+}
+
+#envelope .invitation-date-label {
+font-family: “DM Sans”, sans-serif;
+font-size: 10px;
+letter-spacing: 4px;
+margin-bottom: 8px;
+color: #a08349;
+}
+
+#envelope .envelope-card-date {
+font-family: “Cormorant Garamond”, Georgia, serif;
+font-size: 16px;
+letter-spacing: 2px;
+font-weight: 700;
+color: #71552e;
+}
+
+#envelope .invitation-bottom {
+margin-top: 20px;
+margin-bottom: 0;
+}
 </style>
 </head>
 
@@ -718,10 +839,26 @@ footer strong{display:block;font:25px var(--serif);color:#342d28;margin-bottom:4
 
     <!-- Kad jemputan di dalam sampul -->
     <div class="envelope-card">
-      <div class="envelope-card-title">Jemputan Walimatulurus</div>
-      <div class="envelope-card-names">Mizi &amp; Aina</div>
-      <div class="envelope-card-date">20 DISEMBER 2026</div>
-    </div>
+  <div class="invitation-border">
+    <div class="invitation-ornament">❧ ❦ ❧</div>
+<div class="invitation-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+<div class="invitation-small">JEMPUTAN</div>
+<div class="envelope-card-title">Walimatulurus</div>
+<div class="invitation-divider">
+  <span></span> ✦ <span></span>
+</div>
+<div class="envelope-card-names">
+  Mizi <span>&amp;</span> Aina
+</div>
+<div class="invitation-blessing">
+  Dengan penuh kesyukuran ke hadrat Ilahi,<br>
+  kami menjemput anda ke majlis perkahwinan kami
+</div>
+<div class="invitation-date-label">AHAD</div>
+<div class="envelope-card-date">20 DISEMBER 2026</div>
+<div class="invitation-ornament invitation-bottom">❧ ❦ ❧</div>
+  </div>
+</div>
 
     <!-- Badan dan lipatan sampul -->
     <div class="envelope-body"></div>
