@@ -35,9 +35,9 @@ section{padding:clamp(68px,9vw,100px) 0}
 .section-title h2{font:500 clamp(43px,7vw,65px)/1.05 var(--serif);margin-top:8px}
 :focus-visible{outline:2px solid #9b7658;outline-offset:4px}
 
-/* =========================================
-   FULL-SCREEN SAGE FLORAL ENVELOPE
-========================================= */
+/* ==========================================
+   ENVELOPE BAHARU — BUKA DARI TENGAH
+========================================== */
 
 #envelope {
   position: fixed;
@@ -47,11 +47,12 @@ section{padding:clamp(68px,9vw,100px) 0}
   height: 100dvh;
   z-index: 99999;
   overflow: hidden;
-  background: #aab397;
-  perspective: 1200px;
+  background: #fff8f0;
   opacity: 1;
   visibility: visible;
-  transition: opacity .9s ease, visibility .9s ease;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
 }
 
 #envelope.hide {
@@ -65,271 +66,93 @@ section{padding:clamp(68px,9vw,100px) 0}
   width: 100%;
   height: 100%;
   overflow: hidden;
-  isolation: isolate;
-  background: #aab397;
+  background: #fff8f0;
 }
 
-/* Corak floral memenuhi seluruh skrin */
-.floral-design::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* Lapisan lembut untuk gaya premium */
+/* Matikan background lama di belakang envelope */
+.floral-design::before,
 .floral-design::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: rgba(235, 237, 220, .12);
+  display: none;
 }
 
-/* =========================================
-   KAD DI DALAM SAMPUL
-========================================= */
+/* ==========================================
+   DUA BAHAGIAN ENVELOPE
+========================================== */
 
-.envelope-card {
+.envelope-half {
   position: absolute;
-  z-index: 1;
-  left: 8%;
-  width: 84%;
-  height: 55%;
-  top: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  padding: 25px;
-  background: linear-gradient(145deg, #fffefa, #f5eee5);
-  border: 1px solid #dfd1c4;
-  box-shadow: 0 15px 45px #342d2833;
-
-  transform: translateY(35%);
-  opacity: 0;
+  background-image: url("./sage-floral.JPG");
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
 
   transition:
-    transform 1.4s cubic-bezier(.2,.75,.25,1),
-    opacity .5s ease;
+    transform 1.8s cubic-bezier(.65, 0, .35, 1);
+
+  will-change: transform;
 }
 
-.envelope-card::before {
-  content: "✦";
-  color: #a08369;
-  font-size: 24px;
-  margin-bottom: 15px;
-}
-
-.envelope-card-title {
-  font-family: "Great Vibes", cursive;
-  font-size: clamp(36px, 9vw, 54px);
-  color: #414735;
-}
-
-.envelope-card-names {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(22px, 5vw, 30px);
-  color: #51463c;
-  margin-top: 12px;
-}
-
-.envelope-card-date {
-  font-family: "DM Sans", sans-serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-  margin-top: 18px;
-  color: #85776d;
-}
-
-/* =========================================
-   BADAN SAMPUL SEGI EMPAT
-========================================= */
-
-.envelope-body {
-  position: absolute;
-  z-index: 3;
-
-  left: 5%;
-  right: 5%;
-  top: 19%;
-  height: 52%;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  border: 1px solid rgba(255,255,255,.55);
-  box-shadow: 0 18px 45px rgba(38,45,29,.22);
-}
-
-/* =========================================
-   LIPATAN KIRI DAN KANAN
-========================================= */
-
-.envelope-fold-left,
-.envelope-fold-right {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.envelope-fold-left {
-  z-index: 4;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: left center;
-
-  clip-path: polygon(
-    0 0,
-    50% 50%,
-    0 100%
-  );
-
-  filter: drop-shadow(2px 0 3px rgba(40,45,30,.12));
-}
-
-.envelope-fold-right {
-  z-index: 4;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: right center;
-
-  clip-path: polygon(
-    100% 0,
-    50% 50%,
-    100% 100%
-  );
-
-  filter: drop-shadow(-2px 0 3px rgba(40,45,30,.12));
-}
-
-/* =========================================
-   LIPATAN BAWAH SAMPUL
-========================================= */
-
-.envelope-bottom {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: center bottom;
-
-  clip-path: polygon(
-    0 100%,
-    50% 48%,
-    100% 100%
-  );
-
-  filter: drop-shadow(0 -3px 5px rgba(40,45,30,.12));
-}
-
-/* =========================================
-   FLAP ATAS SAMPUL
-========================================= */
-
-.envelope-flap {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  pointer-events: none;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: cover;
-  background-position: center top;
-
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    50% 56%
-  );
-
-  transform-origin: 50% 0%;
-  transform: rotateX(0deg);
-  backface-visibility: hidden;
-
-  filter: drop-shadow(0 8px 8px rgba(40,45,30,.2));
-
-  transition: transform 1s cubic-bezier(.4,0,.2,1);
-}
-
-/* =========================================
-   RIBBON SAMPUL
-========================================= */
-
-.ribbon {
-  position: absolute;
-  z-index: 7;
-  pointer-events: none;
-
-  background: linear-gradient(
-    90deg,
-    #d9dfb5,
-    #edf0d1 28%,
-    #dce3b9 55%,
-    #c5cda0
-  );
-
-  box-shadow: inset 0 1px 2px #ffffff8c;
-
-  transition: opacity .5s ease;
-}
-
-.ribbon-vertical {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: clamp(38px, 11vw, 65px);
-  transform: translateX(-50%);
-}
-
-.ribbon-horizontal {
+/* BAHAGIAN KIRI */
+.envelope-half-left {
   left: 0;
-  right: 0;
-  top: 43%;
-  height: clamp(30px, 6vh, 48px);
+  z-index: 20;
+  background-position: left center;
+  border-right: 1px solid rgba(91, 105, 75, 0.35);
 }
 
-/* =========================================
-   WAX SEAL IMAGE
-========================================= */
-
-.floral-wax {
-  position: absolute;
+/* BAHAGIAN KANAN */
+.envelope-half-right {
+  right: 0;
   z-index: 10;
+  background-position: right center;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
 
-  top: 46%;
-  left: 50%;
+/* Buang semua bentuk lipatan lama */
+.envelope-half .envelope-body,
+.envelope-half .envelope-fold-left,
+.envelope-half .envelope-fold-right,
+.envelope-half .envelope-bottom,
+.envelope-half .envelope-flap,
+.envelope-half .ribbon,
+.envelope-card {
+  display: none !important;
+}
+
+/* ==========================================
+   WAX SEAL — IKUT BAHAGIAN KIRI
+========================================== */
+
+.envelope-half-left .floral-wax {
+  position: absolute;
+  top: 50%;
+  left: 100%;
 
   width: clamp(90px, 25vw, 125px);
   aspect-ratio: 1;
 
   padding: 0;
-  border: 0;
+  border: none;
   border-radius: 50%;
-
   background: transparent;
-  box-shadow: 0 8px 18px rgba(30,20,15,.25);
+
+  box-shadow: 0 6px 18px rgba(30, 20, 15, 0.28);
 
   transform: translate(-50%, -50%);
-  transition: transform .5s ease, opacity .4s ease;
+  transform-origin: center;
+
+  transition:
+    transform 0.65s ease,
+    opacity 0.5s ease;
+
+  cursor: pointer;
 }
 
-.floral-wax img {
+.envelope-half-left .floral-wax img {
   display: block;
   width: 100%;
   height: 100%;
@@ -337,163 +160,96 @@ section{padding:clamp(68px,9vw,100px) 0}
   border-radius: 50%;
 }
 
-.floral-wax:focus-visible {
-  outline: 3px solid #fff;
+.envelope-half-left .floral-wax:focus-visible {
+  outline: 3px solid white;
   outline-offset: 5px;
 }
 
-/* =========================================
-   TEKS JEMPUTAN
-========================================= */
+/* ==========================================
+   TEKS DI ATAS ENVELOPE
+========================================== */
 
 .invitation-title {
   position: absolute;
-  z-index: 8;
-  top: 57%;
+  z-index: 30;
+  top: 58%;
+  left: 0;
   width: 100%;
-  text-align: center;
 
-  color: #20251a;
+  text-align: center;
+  color: #414735;
   font: clamp(35px, 10vw, 52px)/1.2 "Great Vibes", cursive;
 
   transform: rotate(-7deg);
-  text-shadow: 0 1px 2px rgba(255,255,255,.4);
+  pointer-events: none;
+
+  transition: opacity 0.45s ease;
 }
 
 .invitation-subtitle,
 .invitation-date {
   position: absolute;
-  z-index: 8;
+  z-index: 30;
+  left: 0;
   width: 100%;
+
   text-align: center;
   font-family: "DM Sans", sans-serif;
   color: #414735;
+
+  pointer-events: none;
+  transition: opacity 0.45s ease;
 }
 
 .invitation-subtitle {
-  top: 65%;
+  top: 66%;
   font-size: 9px;
   letter-spacing: 2px;
 }
 
 .invitation-date {
-  top: 69%;
+  top: 70%;
   font-size: 10px;
   letter-spacing: 3px;
 }
 
 .invitation-tap {
   position: absolute;
-  z-index: 11;
+  z-index: 30;
   bottom: max(35px, env(safe-area-inset-bottom));
+  left: 0;
   width: 100%;
-  text-align: center;
 
+  text-align: center;
   font-size: 9px;
   letter-spacing: 2px;
   color: #454c38;
 
   animation: pulse 2s infinite;
+  transition: opacity 0.45s ease;
 }
 
+/* ==========================================
+   ANIMASI BUKA ENVELOPE
+========================================== */
 
-/* =========================================
-   ANIMASI BUKA SAMPUL — PERLAHAN
-========================================= */
-
-/* Flap atas terbuka perlahan */
-.envelope-flap {
-  transform-origin: 50% 0%;
-  transition: transform 2s cubic-bezier(.22,.61,.36,1);
+/* Kiri bergerak keluar ke kiri */
+#envelope.opening .envelope-half-left {
+  transform: translateX(-101%);
 }
 
-/* Kad keluar perlahan dari sampul */
-.envelope-card {
-  transition:
-    transform 2.8s cubic-bezier(.16,1,.3,1),
-    opacity 1.2s ease;
+/* Kanan bergerak keluar ke kanan */
+#envelope.opening .envelope-half-right {
+  transform: translateX(101%);
 }
 
-/* Wax seal hilang secara perlahan */
-.floral-wax {
-  transition:
-    transform 1.2s ease,
-    opacity 1.2s ease;
-}
-
-/* Ribbon hilang perlahan */
-.ribbon {
-  transition: opacity 1.5s ease;
-}
-
-/* Tulisan atas sampul hilang perlahan */
-.invitation-title,
-.invitation-subtitle,
-.invitation-date,
-.invitation-tap {
-  transition: opacity 1.2s ease;
-}
-
-/* Apabila sampul dibuka */
-#envelope.opening .envelope-flap {
-  transform: rotateX(180deg);
-  filter: drop-shadow(0 15px 15px rgba(35, 30, 24, 0.22));
-}
-
-/* Kad terangkat keluar dengan shadow premium */
-.envelope-card {
-  box-shadow:
-    0 5px 12px rgba(52, 45, 40, 0.08),
-    0 15px 30px rgba(52, 45, 40, 0.12),
-    0 30px 60px rgba(52, 45, 40, 0.10);
-
-  transition:
-    transform 2.8s cubic-bezier(.16,1,.3,1),
-    opacity 1.2s ease,
-    box-shadow 2s ease;
-}
-
-/* SHADOW KAD APABILA SAMPUL DIBUKA */
-#envelope.opening .envelope-card {
-  transform: translateY(-50%);
-  opacity: 1;
-
-  box-shadow:
-    0 5px 10px rgba(0, 0, 0, 0.08),
-    0 15px 25px rgba(0, 0, 0, 0.15),
-    0 30px 55px rgba(0, 0, 0, 0.22),
-    0 50px 90px rgba(0, 0, 0, 0.20);
-
-  transition:
-    transform 2.8s cubic-bezier(.16, 1, .3, 1),
-    opacity 1.2s ease,
-    box-shadow 2s ease;
-}
-
-/* BAYANGAN PADA FLAP SAMPUL */
-#envelope.opening .envelope-flap {
-  transform: rotateX(180deg);
-  filter: drop-shadow(
-    0 18px 20px rgba(0, 0, 0, 0.30)
-  );
-}
-
-/* BAYANGAN SAMPUL KE ATAS LATAR */
-#envelope.opening .envelope-body {
-  box-shadow:
-    0 15px 30px rgba(0, 0, 0, 0.15),
-    0 35px 70px rgba(0, 0, 0, 0.20);
-}
-
-#envelope.opening .floral-wax {
-  transform: translate(-50%, -50%) scale(.3) rotate(-25deg);
+/* Wax seal ikut kiri dan pudar semasa bergerak */
+#envelope.opening .envelope-half-left .floral-wax {
+  transform: translate(-50%, -50%) rotate(-18deg) scale(0.8);
   opacity: 0;
 }
 
-#envelope.opening .ribbon {
-  opacity: 0;
-}
-
+/* Hilangkan tulisan pada envelope */
 #envelope.opening .invitation-title,
 #envelope.opening .invitation-subtitle,
 #envelope.opening .invitation-date,
@@ -501,9 +257,11 @@ section{padding:clamp(68px,9vw,100px) 0}
   opacity: 0;
 }
 
-#envelope.opening .floral-design {
-  transform: scale(1.02);
-  transition: transform 2.5s ease;
+/* Hormati tetapan pengguna yang mengurangkan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .envelope-half {
+    transition-duration: 0.5s;
+  }
 }
 
 
@@ -1709,7 +1467,7 @@ function openInvitation() {
     envelope.classList.add("hide");
     document.body.classList.remove("no-scroll");
     document.body.style.removeProperty("touch-action");
-  }, 2500);
+  }, 2000);
 }
 // Tekan wax seal untuk membuka sampul
 if (openWax) {
