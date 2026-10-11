@@ -375,19 +375,22 @@ function openInvitation() {
 if (envelopeOpened || !envelope) return;
 
 envelopeOpened = true;
+envelope.classList.add(“opening”);
 
-// Mula memainkan muzik apabila wax seal ditekan
-if (music) {
-music.play().then(() => {
-musicButton.setAttribute(“aria-pressed”, “true”);
-musicButton.setAttribute(“aria-label”, “Hentikan muzik”);
+// Cuba mainkan muzik apabila wax seal ditekan
+const audio = document.getElementById(“music”);
+const button = document.getElementById(“musicButton”);
+
+if (audio) {
+audio.play().then(() => {
+if (button) {
+button.setAttribute(“aria-pressed”, “true”);
+button.setAttribute(“aria-label”, “Hentikan muzik”);
+}
 }).catch(error => {
-console.log(“Muzik tidak dapat dimainkan secara automatik:”, error);
+console.log(“Muzik tidak dapat dimainkan:”, error);
 });
 }
-
-// Animasi buka sampul
-envelope.classList.add(“opening”);
 
 window.setTimeout(() => {
 envelope.classList.add(“hide”);
