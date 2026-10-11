@@ -1185,6 +1185,135 @@ p,
 label {
   color: var(--text-dark);
 }
+/* =====================================
+   BOTANICAL HERO INTRO ANIMATION
+===================================== */
+
+.botanical-decoration {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.botanical-branch {
+  position: absolute;
+  top: 0;
+  width: min(38vw, 220px);
+  height: 100%;
+  overflow: visible;
+}
+
+.botanical-left {
+  left: 0;
+  transform: translateX(-110%);
+  transform-origin: left center;
+}
+
+.botanical-right {
+  right: 0;
+  transform: translateX(110%);
+  transform-origin: right center;
+}
+
+.branch-stem {
+  fill: none;
+  stroke: #78866a;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
+}
+
+.branch-leaves {
+  fill: #9ba98a;
+  opacity: 0;
+}
+
+.branch-flowers {
+  opacity: 0;
+  transform: scale(0.5);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Aktif selepas envelope terbuka */
+body.hero-botanical-active .botanical-decoration {
+  opacity: 1;
+}
+
+body.hero-botanical-active .botanical-left {
+  animation: branchEnterLeft 2.8s ease-out forwards;
+}
+
+body.hero-botanical-active .botanical-right {
+  animation: branchEnterRight 2.8s ease-out forwards;
+}
+
+body.hero-botanical-active .branch-stem {
+  animation: drawBranch 2.8s ease-out forwards;
+}
+
+body.hero-botanical-active .branch-leaves {
+  animation: leavesAppear 1.5s ease-out 1s forwards;
+}
+
+body.hero-botanical-active .branch-flowers {
+  animation: flowersAppear 1.2s ease-out 1.8s forwards;
+}
+
+@keyframes branchEnterLeft {
+  to { transform: translateX(-8%); }
+}
+
+@keyframes branchEnterRight {
+  to { transform: translateX(8%); }
+}
+
+@keyframes drawBranch {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes leavesAppear {
+  to { opacity: 1; }
+}
+
+@keyframes flowersAppear {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .botanical-branch {
+    width: 34vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hero-botanical-active .botanical-left,
+  body.hero-botanical-active .botanical-right,
+  body.hero-botanical-active .branch-stem,
+  body.hero-botanical-active .branch-leaves,
+  body.hero-botanical-active .branch-flowers {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+    animation-fill-mode: forwards;
+  }
+}
 </style>
 </head>
 
@@ -1237,7 +1366,123 @@ label {
 </div>
 
 <main>
-<section class="hero" aria-label="Raikan Cinta">
+<!-- ANIMASI RANTING BUNGA -->
+<div class="botanical-decoration" aria-hidden="true">
+  <svg class="botanical-branch botanical-left"
+       viewBox="0 0 220 650"
+       xmlns="http://www.w3.org/2000/svg">
+    <path class="branch-stem"
+          d="M-20 650 Q45 510 20 390 T65 170 Q85 90 130 15"/>
+
+    <path class="branch-stem"
+          d="M20 390 Q-5 340 -15 300"/>
+
+    <path class="branch-stem"
+          d="M35 290 Q100 270 120 210"/>
+
+    <path class="branch-stem"
+          d="M50 190 Q10 160 10 115"/>
+
+    <g class="branch-leaves">
+      <ellipse cx="4" cy="345" rx="11" ry="25"
+               transform="rotate(-45 4 345)"/>
+      <ellipse cx="49" cy="320" rx="11" ry="25"
+               transform="rotate(50 49 320)"/>
+      <ellipse cx="82" cy="260" rx="10" ry="23"
+               transform="rotate(45 82 260)"/>
+      <ellipse cx="19" cy="215" rx="11" ry="25"
+               transform="rotate(-45 19 215)"/>
+      <ellipse cx="95" cy="155" rx="10" ry="23"
+               transform="rotate(45 95 155)"/>
+      <ellipse cx="54" cy="95" rx="10" ry="23"
+               transform="rotate(-35 54 95)"/>
+      <ellipse cx="135" cy="65" rx="10" ry="23"
+               transform="rotate(55 135 65)"/>
+    </g>
+
+    <g class="branch-flowers">
+      <g transform="translate(20 300)">
+        <circle r="5" cy="-9" fill="#e9b8c2"/>
+        <circle r="5" cx="9" fill="#e9b8c2"/>
+        <circle r="5" cy="9" fill="#e9b8c2"/>
+        <circle r="5" cx="-9" fill="#e9b8c2"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+      <g transform="translate(120 210)">
+        <circle r="6" cy="-10" fill="#f1d5da"/>
+        <circle r="6" cx="10" fill="#f1d5da"/>
+        <circle r="6" cy="10" fill="#f1d5da"/>
+        <circle r="6" cx="-10" fill="#f1d5da"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+      <g transform="translate(10 115)">
+        <circle r="5" cy="-8" fill="#e9b8c2"/>
+        <circle r="5" cx="8" fill="#e9b8c2"/>
+        <circle r="5" cy="8" fill="#e9b8c2"/>
+        <circle r="5" cx="-8" fill="#e9b8c2"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+    </g>
+  </svg>
+
+  <svg class="botanical-branch botanical-right"
+       viewBox="0 0 220 650"
+       xmlns="http://www.w3.org/2000/svg">
+    <path class="branch-stem"
+          d="M240 650 Q175 510 200 390 T155 170 Q135 90 90 15"/>
+
+    <path class="branch-stem"
+          d="M200 390 Q225 340 235 300"/>
+
+    <path class="branch-stem"
+          d="M185 290 Q120 270 100 210"/>
+
+    <path class="branch-stem"
+          d="M170 190 Q210 160 210 115"/>
+
+    <g class="branch-leaves">
+      <ellipse cx="216" cy="345" rx="11" ry="25"
+               transform="rotate(45 216 345)"/>
+      <ellipse cx="171" cy="320" rx="11" ry="25"
+               transform="rotate(-50 171 320)"/>
+      <ellipse cx="138" cy="260" rx="10" ry="23"
+               transform="rotate(-45 138 260)"/>
+      <ellipse cx="201" cy="215" rx="11" ry="25"
+               transform="rotate(45 201 215)"/>
+      <ellipse cx="125" cy="155" rx="10" ry="23"
+               transform="rotate(-45 125 155)"/>
+      <ellipse cx="166" cy="95" rx="10" ry="23"
+               transform="rotate(35 166 95)"/>
+      <ellipse cx="85" cy="65" rx="10" ry="23"
+               transform="rotate(-55 85 65)"/>
+    </g>
+
+    <g class="branch-flowers">
+      <g transform="translate(200 300)">
+        <circle r="5" cy="-9" fill="#e9b8c2"/>
+        <circle r="5" cx="9" fill="#e9b8c2"/>
+        <circle r="5" cy="9" fill="#e9b8c2"/>
+        <circle r="5" cx="-9" fill="#e9b8c2"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+      <g transform="translate(100 210)">
+        <circle r="6" cy="-10" fill="#f1d5da"/>
+        <circle r="6" cx="10" fill="#f1d5da"/>
+        <circle r="6" cy="10" fill="#f1d5da"/>
+        <circle r="6" cx="-10" fill="#f1d5da"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+      <g transform="translate(210 115)">
+        <circle r="5" cy="-8" fill="#e9b8c2"/>
+        <circle r="5" cx="8" fill="#e9b8c2"/>
+        <circle r="5" cy="8" fill="#e9b8c2"/>
+        <circle r="5" cx="-8" fill="#e9b8c2"/>
+        <circle r="4" fill="#d6b66e"/>
+      </g>
+    </g>
+  </svg>
+</div>
+  <section class="hero" aria-label="Raikan Cinta">
   <div class="container">
     <div class="eyebrow">RAIKAN CINTA</div>
 
@@ -1465,6 +1710,8 @@ function openInvitation() {
   // Tunggu animasi sampul selesai sebelum paparkan halaman utama
   window.setTimeout(() => {
     envelope.classList.add("hide");
+    document.body.classList.add("hero-botanical-active");
+    
     document.body.classList.remove("no-scroll");
     document.body.style.removeProperty("touch-action");
   }, 1400);
