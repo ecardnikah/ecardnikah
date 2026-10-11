@@ -59,55 +59,36 @@ section{padding:clamp(68px,9vw,100px) 0}
   pointer-events: none;
 }
 
+
 .floral-design {
-
-    position: relative;
-
-    width: 100%;
-
-    height: 100%;
-
-    overflow: hidden;
-
-    background-color: #c4cbb0;
-
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #c4cbb0;
+  isolation: isolate;
 }
 
 .floral-design::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background-image: url("./sage-floral.JPG");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    z-index: 0;
-
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("./sage-floral.JPG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .floral-design::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background: rgba(235, 237, 220, 0.12);
-
-    z-index: 1;
-
-    pointer-events: none;
-
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(235, 237, 220, 0.12);
+  pointer-events: none;
 }
+
 
 .floral-wax,
 
@@ -502,23 +483,33 @@ footer strong{display:block;font:25px var(--serif);color:#342d28;margin-bottom:4
 
 <body class="no-scroll">
 <!-- Sampul penuh skrin. Letakkan sage-floral.jpg dalam folder yang sama untuk corak bunga. -->
-<div id="envelope" role="dialog" aria-modal="true"
 
+<div id="envelope" role="dialog" aria-modal="true"
      aria-label="Sampul jemputan perkahwinan">
 
   <div class="floral-design">
 
+    <div class="envelope-card">
+      <div class="envelope-card-title">Jemputan Walimatulurus</div>
+      <div class="envelope-card-names">Mizi &amp; Aina</div>
+      <div class="envelope-card-date">20 DISEMBER 2026</div>
+    </div>
+
+    <div class="envelope-flap"></div>
+
+    <div class="ribbon ribbon-vertical"></div>
+    <div class="ribbon ribbon-horizontal"></div>
+
     <button type="button" class="floral-wax" id="openWax"
-
             aria-label="Buka kad jemputan">
-
       <span class="wax-initials">M<span>&amp;</span>A</span>
-
     </button>
 
     <div class="invitation-title">You are invited</div>
 
   </div>
+</div>
+
 
 </div>
 <main>
