@@ -1223,84 +1223,101 @@ async function loadMessages() {
 loadMessages();
 </script>
 <style>
-/* ROMANTIC LOVE TOUCH EFFECT */
-.love-particle-layer {
+/* SOFT BUBBLE TOUCH EFFECT */
+.bubble-layer {
     position: fixed;
     inset: 0;
     z-index: 100001;
     pointer-events: none;
     overflow: hidden;
 }
-.love-particle {
+
+.soft-bubble {
     position: absolute;
-    left: 0;
-    top: 0;
-    font-size: var(--size, 22px);
-    line-height: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    background: radial-gradient(
+        circle at 30% 25%,
+        rgba(255, 255, 255, 0.55),
+        rgba(255, 255, 255, 0.10) 55%,
+        rgba(255, 255, 255, 0.03)
+    );
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
     opacity: 0;
     transform: translate(-50%, -50%);
-    animation: loveFloat var(--duration, 1.6s) ease-out forwards;
+    animation: bubbleRise 2.2s ease-out forwards;
     will-change: transform, opacity;
-    filter: drop-shadow(0 2px 4px rgba(150, 50, 65, .15));
 }
-@keyframes loveFloat {
+
+@keyframes bubbleRise {
     0% {
         opacity: 0;
-        transform: translate(-50%, -40%) scale(.35) rotate(0deg);
+        transform: translate(-50%, -30%) scale(0.6);
     }
+
     15% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1) rotate(-10deg);
+        opacity: 0.65;
     }
+
     100% {
         opacity: 0;
-        transform:
-            translate(
-                calc(-50% + var(--drift-x)),
-                calc(-50% + var(--drift-y))
-            )
-            scale(.75)
-            rotate(var(--rotation));
+        transform: translate(
+            calc(-50% + var(--move-x)),
+            calc(-50% + var(--move-y))
+        ) scale(1.15);
     }
 }
+
 @media (prefers-reduced-motion: reduce) {
-    .love-particle {
-        animation-duration: .5s;
+    .soft-bubble {
+        animation-duration: 0.8s;
     }
 }
 </style>
+
 <script>
 (() => {
     const layer = document.createElement('div');
-    layer.className = 'love-particle-layer';
+    layer.className = 'bubble-layer';
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
+
     let lastTouch = 0;
-    const hearts = ['❤️', '💕', '💗', '💖', '🤍'];
-    document.addEventListener('pointerdown', event => {
+
+    document.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'mouse' && event.button !== 0) return;
+
         const now = performance.now();
-        if (now - lastTouch < 100) return;
+        if (now - lastTouch < 150) return;
         lastTouch = now;
-        for (let i = 0; i < 7; i++) {
-            const heart = document.createElement('span');
-            heart.className = 'love-particle';
-            heart.textContent = hearts[
-                Math.floor(Math.random() * hearts.length)
-            ];
-            const driftX = (Math.random() - .5) * 110;
-            const driftY = -(40 + Math.random() * 100);
-            heart.style.left = event.clientX + 'px';
-            heart.style.top = event.clientY + 'px';
-            heart.style.setProperty('--size', (14 + Math.random() * 16) + 'px');
-            heart.style.setProperty('--duration', (1.2 + Math.random() * .7) + 's');
-            heart.style.setProperty('--drift-x', driftX + 'px');
-            heart.style.setProperty('--drift-y', driftY + 'px');
-            heart.style.setProperty('--rotation', (Math.random() * 70 - 35) + 'deg');
-            layer.appendChild(heart);
-            heart.addEventListener('animationend', () => heart.remove(), {
-                once: true
-            });
+
+        // Hanya 4 buih kecil setiap sentuhan
+        for (let i = 0; i < 4; i++) {
+            const bubble = document.createElement('span');
+            bubble.className = 'soft-bubble';
+
+            const size = 6 + Math.random() * 9;
+
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = event.clientX + 'px';
+            bubble.style.top = event.clientY + 'px';
+
+            bubble.style.setProperty(
+                '--move-x',
+                (Math.random() * 50 - 25) + 'px'
+            );
+
+            bubble.style.setProperty(
+                '--move-y',
+                -(25 + Math.random() * 45) + 'px'
+            );
+
+            layer.appendChild(bubble);
+
+            bubble.addEventListener('animationend', () => {
+                bubble.remove();
+            }, { once: true });
         }
     }, { passive: true });
 })();
