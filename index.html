@@ -1680,7 +1680,7 @@ loadMessages();
 <script>
 (() => {
     const layer = document.createElement('div');
-    layer.className = 'bubble-layer';
+    layer.className = 'flower-layer';
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
 
@@ -1689,36 +1689,38 @@ loadMessages();
     document.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'mouse' && event.button !== 0) return;
 
+        // Elakkan kesan berganda
         const now = performance.now();
         if (now - lastTouch < 150) return;
         lastTouch = now;
 
-        // Hanya 4 buih kecil setiap sentuhan
+        // Bunga keluar apabila skrin disentuh
+        const flowers = ['🌸', '🌷', '🌼', '🌺', '✿'];
+
         for (let i = 0; i < 4; i++) {
-            const bubble = document.createElement('span');
-            bubble.className = 'soft-bubble';
+            const flower = document.createElement('span');
+            flower.className = 'soft-flower';
 
-            const size = 6 + Math.random() * 9;
+            flower.textContent =
+                flowers[Math.floor(Math.random() * flowers.length)];
 
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-            bubble.style.left = event.clientX + 'px';
-            bubble.style.top = event.clientY + 'px';
+            flower.style.left = event.clientX + 'px';
+            flower.style.top = event.clientY + 'px';
 
-            bubble.style.setProperty(
+            flower.style.setProperty(
                 '--move-x',
-                (Math.random() * 50 - 25) + 'px'
+                (Math.random() * 100 - 50) + 'px'
             );
 
-            bubble.style.setProperty(
+            flower.style.setProperty(
                 '--move-y',
-                -(25 + Math.random() * 45) + 'px'
+                -(40 + Math.random() * 70) + 'px'
             );
 
-            layer.appendChild(bubble);
+            layer.appendChild(flower);
 
-            bubble.addEventListener('animationend', () => {
-                bubble.remove();
+            flower.addEventListener('animationend', () => {
+                flower.remove();
             }, { once: true });
         }
     }, { passive: true });
