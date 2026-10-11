@@ -1089,6 +1089,181 @@ margin-bottom: 0;
 .envelope-half-left .ribbon {
   display: none !important;
 }
+/* =========================================
+   PAGE KAD JEMPUTAN — SAGE FLORAL
+========================================= */
+
+.invitation-page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  padding: 30px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #e9eadf;
+  color: #59664e;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.invitation-paper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 650px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 42px 25px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      rgba(250, 249, 243, 0.91),
+      rgba(250, 249, 243, 0.91)
+    ),
+    url("./sage-floral.JPG") center / cover no-repeat;
+  border: 1px solid #b7bea5;
+  box-shadow: 0 12px 35px rgba(65, 75, 52, 0.13);
+}
+
+.invitation-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+
+.invitation-bismillah {
+  font-size: clamp(21px, 5vw, 28px);
+  line-height: 1.9;
+  color: #59664e;
+  margin-bottom: 17px;
+}
+
+.invitation-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #9ba486;
+  margin: 17px auto;
+}
+
+.invitation-divider span {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: #aab397;
+}
+
+.invitation-opening {
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 22px 0;
+  letter-spacing: 0.5px;
+}
+
+.invitation-parents {
+  margin: 24px 0;
+}
+
+.invitation-parents h2 {
+  font-size: clamp(15px, 4vw, 19px);
+  line-height: 1.6;
+  font-weight: normal;
+  letter-spacing: 1.2px;
+  margin: 5px 0;
+}
+
+.invitation-ampersand {
+  font-size: 23px;
+  font-style: italic;
+  color: #9ba486;
+  margin: 3px 0;
+}
+
+.invitation-description {
+  max-width: 340px;
+  margin: 24px auto;
+  font-size: 14px;
+  line-height: 2;
+  letter-spacing: 0.2px;
+}
+
+.invitation-couple {
+  margin: 25px 0;
+}
+
+.invitation-couple h1 {
+  font-size: clamp(19px, 5vw, 25px);
+  font-weight: normal;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+.invitation-couple-ampersand {
+  font-size: 27px;
+  font-style: italic;
+  color: #9ba486;
+  margin: 4px 0;
+}
+
+.invitation-closing {
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 25px auto 15px;
+}
+
+.invitation-ornament {
+  color: #9ba486;
+  font-size: 24px;
+  letter-spacing: 5px;
+  margin-top: 20px;
+}
+
+/* Hiasan bunga di penjuru kad */
+
+.invitation-flower {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  background: url("./sage-floral.JPG") center / cover no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.invitation-flower-top {
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 100%;
+}
+
+.invitation-flower-bottom {
+  right: 0;
+  bottom: 0;
+  border-top-left-radius: 100%;
+}
+
+/* Paparan telefon */
+
+@media (max-width: 380px) {
+  .invitation-page {
+    padding: 18px 12px;
+  }
+
+  .invitation-paper {
+    min-height: 600px;
+    padding: 32px 17px;
+  }
+
+  .invitation-description {
+    font-size: 13px;
+  }
+}
 </style>
 </head>
 
@@ -1155,16 +1330,70 @@ margin-bottom: 0;
   </div>
 </section>
 
-<section class="intro-section">
-  <div class="intro-container">
-    <div class="intro-ornament" aria-hidden="true">✦</div>
-    <div class="intro-arabic" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-    <div class="intro-line"></div>
-    <p class="intro-small">Dengan penuh kesyukuran kepada Allah SWT</p>
-    <p class="intro-text">Dengan segala hormatnya kami menjemput Dato’ / Datin / Tuan / Puan / Encik / Cik ke majlis perkahwinan kami.</p>
-    <div class="intro-names">Mizi <span>&amp;</span> Aina</div>
-    <div class="intro-ornament bottom" aria-hidden="true">✦</div>
+<!-- PAGE KAD JEMPUTAN -->
+<section id="invitation-page" class="invitation-page">
+
+  <div class="invitation-paper">
+
+    <!-- Hiasan bunga -->
+    <div class="invitation-flower invitation-flower-top"></div>
+    <div class="invitation-flower invitation-flower-bottom"></div>
+
+    <!-- Kandungan kad -->
+    <div class="invitation-content">
+
+      <!-- Bismillah Arab -->
+      <div class="invitation-bismillah">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+      </div>
+
+      <div class="invitation-divider">
+        <span></span> ❦ <span></span>
+      </div>
+
+      <!-- Ayat pembukaan -->
+      <p class="invitation-opening">
+        Dengan penuh kesyukuran<br>
+        ke hadrat Ilahi,
+      </p>
+
+      <!-- Nama ibu bapa -->
+      <div class="invitation-parents">
+        <h2>NAMA BAPA PENGANTIN</h2>
+        <div class="invitation-ampersand">&amp;</div>
+        <h2>NAMA IBU PENGANTIN</h2>
+      </div>
+
+      <!-- Ayat jemputan -->
+      <p class="invitation-description">
+        Dengan segala hormatnya menjemput
+        Dato’ / Datin / Tuan / Puan / Encik / Cik
+        serta seisi keluarga ke majlis perkahwinan
+        anakanda kami bersama pasangannya.
+      </p>
+
+      <div class="invitation-divider">
+        <span></span> ✦ <span></span>
+      </div>
+
+      <!-- Nama pengantin -->
+      <div class="invitation-couple">
+        <h1>PENGANTIN LELAKI</h1>
+        <div class="invitation-couple-ampersand">&amp;</div>
+        <h1>PENGANTIN PEREMPUAN</h1>
+      </div>
+
+      <!-- Penutup -->
+      <p class="invitation-closing">
+        Kehadiran serta doa restu anda
+        amatlah kami hargai.
+      </p>
+
+      <div class="invitation-ornament">❧ ❦ ❧</div>
+
+    </div>
   </div>
+
 </section>
 
 <section class="couple-section">
