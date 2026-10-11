@@ -1223,71 +1223,48 @@ async function loadMessages() {
 loadMessages();
 </script>
 <style>
-/* ROMANTIC TOUCH EFFECTS */
-.touch-particle-layer {
+/* ROMANTIC LOVE TOUCH EFFECT */
+.love-particle-layer {
     position: fixed;
     inset: 0;
-    z-index: 100000;
+    z-index: 100001;
     pointer-events: none;
     overflow: hidden;
 }
-.touch-particle {
+.love-particle {
     position: absolute;
     left: 0;
     top: 0;
-    pointer-events: none;
-    will-change: transform, opacity;
-    animation: touchParticleFloat var(--duration, 1.8s) ease-out forwards;
-}
-.touch-bubble {
-    width: var(--size, 12px);
-    height: var(--size, 12px);
-    border: 1px solid rgba(255,255,255,.9);
-    border-radius: 50%;
-    background: radial-gradient(
-        circle at 30% 25%,
-        rgba(255,255,255,.9),
-        rgba(255,255,255,.12) 55%,
-        rgba(211,185,126,.16)
-    );
-    box-shadow: inset -2px -2px 5px rgba(255,255,255,.3),
-                0 0 8px rgba(255,255,255,.3);
-}
-.touch-petal {
-    width: var(--size, 10px);
-    height: calc(var(--size, 10px) * 1.55);
-    border-radius: 90% 10% 90% 10%;
-    background: linear-gradient(135deg, #fffdf5, #ead9b8);
-    box-shadow: 0 1px 5px rgba(160,131,105,.15);
-}
-.touch-sparkle {
-    color: #c5a35c;
-    font-size: var(--size, 12px);
+    font-size: var(--size, 22px);
     line-height: 1;
-    text-shadow: 0 0 7px rgba(255,224,155,.8);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: loveFloat var(--duration, 1.6s) ease-out forwards;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 2px 4px rgba(150, 50, 65, .15));
 }
-@keyframes touchParticleFloat {
+@keyframes loveFloat {
     0% {
         opacity: 0;
-        transform: translate(-50%, -50%) translate(0, 8px) rotate(0deg) scale(.45);
+        transform: translate(-50%, -40%) scale(.35) rotate(0deg);
     }
     15% {
         opacity: 1;
-    }
-    75% {
-        opacity: .85;
+        transform: translate(-50%, -50%) scale(1.1) rotate(-10deg);
     }
     100% {
         opacity: 0;
         transform:
-            translate(-50%, -50%)
-            translate(var(--drift-x), var(--drift-y))
-            rotate(var(--rotation))
-            scale(1.15);
+            translate(
+                calc(-50% + var(--drift-x)),
+                calc(-50% + var(--drift-y))
+            )
+            scale(.75)
+            rotate(var(--rotation));
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    .touch-particle {
+    .love-particle {
         animation-duration: .5s;
     }
 }
@@ -1295,54 +1272,36 @@ loadMessages();
 <script>
 (() => {
     const layer = document.createElement('div');
-    layer.className = 'touch-particle-layer';
+    layer.className = 'love-particle-layer';
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
     let lastTouch = 0;
-    function createTouchEffect(x, y) {
-        const now = performance.now();
-        if (now - lastTouch < 90) return;
-        lastTouch = now;
-        const items = [
-            { type: 'bubble', count: 5 },
-            { type: 'petal', count: 4 },
-            { type: 'sparkle', count: 3 }
-        ];
-        items.forEach(group => {
-            for (let i = 0; i < group.count; i++) {
-                const particle = document.createElement('span');
-                particle.className = 'touch-particle';
-                const angle = Math.random() * Math.PI * 2;
-                const distance = 25 + Math.random() * 65;
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                particle.style.setProperty('--drift-x',
-                    Math.cos(angle) * distance + 'px');
-                particle.style.setProperty('--drift-y',
-                    (-25 - Math.random() * 90) + 'px');
-                particle.style.setProperty('--rotation',
-                    (Math.random() * 240 - 120) + 'deg');
-                particle.style.setProperty('--duration',
-                    (1.2 + Math.random() * .8) + 's');
-                particle.style.setProperty('--size',
-                    (6 + Math.random() * 10) + 'px');
-                if (group.type === 'bubble') {
-                    particle.classList.add('touch-bubble');
-                } else if (group.type === 'petal') {
-                    particle.classList.add('touch-petal');
-                } else {
-                    particle.classList.add('touch-sparkle');
-                    particle.textContent = '✦';
-                }
-                layer.appendChild(particle);
-                particle.addEventListener('animationend',
-                    () => particle.remove(), { once: true });
-            }
-        });
-    }
+    const hearts = ['❤️', '💕', '💗', '💖', '🤍'];
     document.addEventListener('pointerdown', event => {
         if (event.pointerType === 'mouse' && event.button !== 0) return;
-        createTouchEffect(event.clientX, event.clientY);
+        const now = performance.now();
+        if (now - lastTouch < 100) return;
+        lastTouch = now;
+        for (let i = 0; i < 7; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'love-particle';
+            heart.textContent = hearts[
+                Math.floor(Math.random() * hearts.length)
+            ];
+            const driftX = (Math.random() - .5) * 110;
+            const driftY = -(40 + Math.random() * 100);
+            heart.style.left = event.clientX + 'px';
+            heart.style.top = event.clientY + 'px';
+            heart.style.setProperty('--size', (14 + Math.random() * 16) + 'px');
+            heart.style.setProperty('--duration', (1.2 + Math.random() * .7) + 's');
+            heart.style.setProperty('--drift-x', driftX + 'px');
+            heart.style.setProperty('--drift-y', driftY + 'px');
+            heart.style.setProperty('--rotation', (Math.random() * 70 - 35) + 'deg');
+            layer.appendChild(heart);
+            heart.addEventListener('animationend', () => heart.remove(), {
+                once: true
+            });
+        }
     }, { passive: true });
 })();
 </script>
