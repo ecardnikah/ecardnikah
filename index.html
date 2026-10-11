@@ -1049,6 +1049,46 @@ margin-bottom: 0;
 .envelope-half .ribbon {
   display: none !important;
 }
+/* =========================================
+   REKA SEMULA BAHAGIAN KIRI ENVELOPE
+========================================= */
+
+.envelope-half-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 10;
+  background-image: url("./sage-floral.JPG");
+  background-size: 200% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+/* Pastikan bentuk kiri tidak menghasilkan ruang kosong */
+.envelope-half-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("./sage-floral.JPG");
+  background-size: 200% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Pastikan animasi kiri kekal */
+#envelope.opening .envelope-half-left {
+  transform: translateX(-105%);
+}
+
+/* Buang ribbon pada bahagian kiri */
+.envelope-half-left .ribbon {
+  display: none !important;
+}
 </style>
 </head>
 
