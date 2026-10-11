@@ -1027,21 +1027,6 @@ margin-bottom: 0;
 .floral-design > .ribbon {
   display: none !important;
 }
-/* BUANG SEMUA RIBBON */
-.envelope-half .ribbon,
-.floral-design > .ribbon {
-  display: none !important;
-}
-/* BETULKAN SUSUNAN LAPISAN SAMPUL */
-.envelope-half-left {
-  z-index: 30 !important;
-  overflow: visible !important;
-}
-
-.envelope-half-right {
-  z-index: 20 !important;
-  overflow: visible !important;
-}
 
 /* Wax seal berada di hadapan sampul */
 .envelope-half-left .floral-wax {
@@ -1051,19 +1036,6 @@ margin-bottom: 0;
   z-index: 99999 !important;
   transform: translate(-50%, -50%) !important;
 }
-/* TUTUP BAHAGIAN ATAS SAMPUL KIRI */
-.envelope-half-left::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  background-image: url("./sage-floral.JPG");
-  background-size: 200% 100%;
-  background-position: left center;
-  background-repeat: no-repeat;
-}
 
 /* Pastikan komponen sampul berada di atas lapisan penutup */
 .envelope-half-left > * {
@@ -1072,6 +1044,10 @@ margin-bottom: 0;
 
 .envelope-half-left .floral-wax {
   z-index: 99999 !important;
+}
+/* Buang ribbon tanpa mengubah bentuk sampul */
+.envelope-half .ribbon {
+  display: none !important;
 }
 </style>
 </head>
