@@ -396,10 +396,45 @@ section{padding:clamp(68px,9vw,100px) 0}
   animation: pulse 2s infinite;
 }
 
+
 /* =========================================
-   ANIMASI BUKA SAMPUL
+   ANIMASI BUKA SAMPUL — PERLAHAN
 ========================================= */
 
+/* Flap atas terbuka perlahan */
+.envelope-flap {
+  transform-origin: 50% 0%;
+  transition: transform 2s cubic-bezier(.22,.61,.36,1);
+}
+
+/* Kad keluar perlahan dari sampul */
+.envelope-card {
+  transition:
+    transform 2.8s cubic-bezier(.16,1,.3,1),
+    opacity 1.2s ease;
+}
+
+/* Wax seal hilang secara perlahan */
+.floral-wax {
+  transition:
+    transform 1.2s ease,
+    opacity 1.2s ease;
+}
+
+/* Ribbon hilang perlahan */
+.ribbon {
+  transition: opacity 1.5s ease;
+}
+
+/* Tulisan atas sampul hilang perlahan */
+.invitation-title,
+.invitation-subtitle,
+.invitation-date,
+.invitation-tap {
+  transition: opacity 1.2s ease;
+}
+
+/* Apabila sampul dibuka */
 #envelope.opening .envelope-flap {
   transform: rotateX(180deg);
 }
@@ -423,16 +458,11 @@ section{padding:clamp(68px,9vw,100px) 0}
 #envelope.opening .invitation-date,
 #envelope.opening .invitation-tap {
   opacity: 0;
-  transition: opacity .3s ease;
 }
 
 #envelope.opening .floral-design {
-  transform: scale(1.03);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: .45; }
-  50% { opacity: 1; }
+  transform: scale(1.02);
+  transition: transform 2.5s ease;
 }
 
 
@@ -792,11 +822,11 @@ function openInvitation() {
   }
 
   window.setTimeout(() => {
-    envelope.classList.add("hide");
-    document.body.classList.remove("no-scroll");
-    document.body.style.removeProperty("touch-action");
-  }, 2800);
-}
+  envelope.classList.add("hide");
+
+  document.body.classList.remove("no-scroll");
+  document.body.style.removeProperty("touch-action");
+}, 4500);
 openWax?.addEventListener("click", openInvitation);
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !envelopeOpened) openInvitation();
