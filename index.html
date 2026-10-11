@@ -997,6 +997,36 @@ margin-bottom: 0;
 .envelope-card {
   display: none !important;
 }
+/* BETULKAN KEDUDUKAN WAX SEAL */
+.envelope-half-left {
+  z-index: 20 !important;
+}
+
+.envelope-half-right {
+  z-index: 10 !important;
+}
+
+.envelope-half-left .floral-wax {
+  position: absolute;
+  left: 100% !important;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999 !important;
+}
+
+/* Wax seal bergerak bersama sampul kiri */
+#envelope.opening .envelope-half-left .floral-wax {
+  transform: translate(-50%, -50%);
+}
+/* ELAKKAN LIPATAN SAMPUL BERTINDIH */
+.floral-design > .envelope-body,
+.floral-design > .envelope-fold-left,
+.floral-design > .envelope-fold-right,
+.floral-design > .envelope-bottom,
+.floral-design > .envelope-flap,
+.floral-design > .ribbon {
+  display: none !important;
+}
 </style>
 </head>
 
